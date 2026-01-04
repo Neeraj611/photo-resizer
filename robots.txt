@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://neeraj611.github.io/photo-resizer/sitemap.xml
 
 # Optimize crawl rate
 Crawl-delay: 1
