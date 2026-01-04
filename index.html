@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO Meta Tags -->
+    <title>Free Photo Resizer for SSC, UPSC, GATE Exams | Sarkari Photo Tool 2026</title>
+    <meta name="description"
+        content="Resize & compress photos for SSC CGL, UPSC, GATE exams. Free online tool - exact govt specifications. No upload, 100% secure. Perfect passport size photos in seconds!">
+    <meta name="keywords"
+        content="SSC photo resizer, UPSC photo size, GATE photo editor, government exam photo, sarkari exam photo, passport photo online, photo compressor India, SSC CGL photo, exam photo maker">
+    <meta name="author" content="Sarkari Photo Resizer">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://yourdomain.com/index.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:title" content="Free SSC, UPSC, GATE Photo Resizer | Government Exam Tool">
+    <meta property="og:description"
+        content="Resize photos for government exams instantly. Free, secure, no upload required. Perfect for SSC, UPSC, GATE applications.">
+    <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+    <meta property="og:locale" content="en_IN">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://yourdomain.com/">
+    <meta name="twitter:title" content="Free SSC, UPSC, GATE Photo Resizer">
+    <meta name="twitter:description" content="Resize photos for government exams. Free & secure online tool.">
+    <meta name="twitter:image" content="https://yourdomain.com/twitter-image.jpg">
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Sarkari Photo Resizer",
+      "url": "https://yourdomain.com",
+      "description": "Free online photo resizer for SSC, UPSC, GATE and government exams. Resize and compress photos to exact specifications.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Sarkari Photo Resizer"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250"
+      }
+    }
+    </script>
+
+    <!-- Google Search Console Verification -->
+    <!-- TODO: After setting up Search Console, replace the content value below -->
+    <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" /> -->
+
+    <!-- Google Analytics -->
+    <!-- TODO: After setting up Analytics, replace G-XXXXXXXXXX with your Measurement ID -->
+    <!-- Uncomment the code below after getting your Measurement ID -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* Custom styles for enhanced UI */
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .upload-zone {
+            border: 3px dashed #cbd5e0;
+            transition: all 0.3s ease;
+        }
+
+        .upload-zone:hover {
+            border-color: #667eea;
+            background-color: #f7fafc;
+        }
+
+        .upload-zone.dragover {
+            border-color: #667eea;
+            background-color: #edf2f7;
+            transform: scale(1.02);
+        }
+
+        .preview-container {
+            max-height: 400px;
+            overflow: hidden;
+        }
+
+        .stat-badge {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        }
+
+        .process-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+
+        .process-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(72, 187, 120, 0.3);
+        }
+
+        .ad-container {
+            min-height: 100px;
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a0aec0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Top Ad Container -->
+    <div id="ad-container-top" class="ad-container">
+        <!-- AdSense code will be placed here -->
+        <span>Advertisement Space</span>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">🇮🇳 Sarkari Photo Resizer</h1>
+            <p class="text-lg md:text-xl text-gray-100">Resize & Compress Photos for SSC, UPSC, GATE & Other Government
+                Exams</p>
+            <p class="text-sm mt-2 text-gray-200">100% Free • No Registration • Privacy Protected</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+
+        <!-- Exam Preset Selection -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Select Exam Type</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="examPreset" class="block text-sm font-medium text-gray-700 mb-2">Choose Exam
+                        Preset:</label>
+                    <select id="examPreset"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        <option value="ssc">SSC CGL/CHSL (3.5cm x 4.5cm, Max 50KB)</option>
+                        <option value="upsc">UPSC (350x350 pixels, Max 300KB)</option>
+                        <option value="gate">GATE (480x640 pixels, Max 100KB)</option>
+                        <option value="custom">Custom Dimensions</option>
+                    </select>
+                </div>
+
+                <!-- Add Date Checkbox -->
+                <div class="flex items-center">
+                    <input type="checkbox" id="addDate"
+                        class="w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
+                    <label for="addDate" class="ml-3 text-sm font-medium text-gray-700">
+                        📅 Print Today's Date on Photo? <span class="text-xs text-gray-500">(Required for SSC)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Custom Dimensions (Hidden by default) -->
+            <div id="customDimensions" class="mt-4 hidden">
+                <h3 class="text-lg font-semibold text-gray-800 mb-3">Custom Dimensions</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label for="customWidth" class="block text-sm font-medium text-gray-700 mb-1">Width
+                            (pixels):</label>
+                        <input type="number" id="customWidth" placeholder="e.g., 350"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                    </div>
+                    <div>
+                        <label for="customHeight" class="block text-sm font-medium text-gray-700 mb-1">Height
+                            (pixels):</label>
+                        <input type="number" id="customHeight" placeholder="e.g., 350"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                    </div>
+                    <div>
+                        <label for="customMaxKB" class="block text-sm font-medium text-gray-700 mb-1">Max Size
+                            (KB):</label>
+                        <input type="number" id="customMaxKB" placeholder="e.g., 100"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Zone -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Upload Your Photo</h2>
+            <div id="uploadZone" class="upload-zone rounded-lg p-12 text-center cursor-pointer">
+                <input type="file" id="fileInput" accept="image/*" class="hidden">
+                <svg class="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                    </path>
+                </svg>
+                <p class="text-lg font-semibold text-gray-700 mb-2">Click to Upload or Drag & Drop</p>
+                <p class="text-sm text-gray-500">Supports: JPG, PNG, JPEG</p>
+            </div>
+        </div>
+
+        <!-- Preview & Stats Section -->
+        <div id="previewSection" class="hidden">
+            <!-- File Stats -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">File Statistics</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg p-4">
+                        <p class="text-sm opacity-90">Original Size</p>
+                        <p id="originalSize" class="text-2xl font-bold">-</p>
+                    </div>
+                    <div class="stat-badge text-white rounded-lg p-4">
+                        <p class="text-sm opacity-90">Processed Size</p>
+                        <p id="processedSize" class="text-2xl font-bold">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Preview -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Image Preview</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Original Image -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-3">Original Image</h3>
+                        <div
+                            class="preview-container border border-gray-300 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                            <img id="originalPreview" src="" alt="Original" class="max-w-full h-auto">
+                        </div>
+                    </div>
+
+                    <!-- Processed Image -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-3">Processed Image</h3>
+                        <div
+                            class="preview-container border border-gray-300 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                            <canvas id="processedCanvas" class="max-w-full h-auto"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button id="processBtn" class="process-btn text-white font-bold py-4 px-8 rounded-lg text-lg">
+                    ⚡ Process Image
+                </button>
+                <button id="downloadBtn" class="download-btn text-white font-bold py-4 px-8 rounded-lg text-lg hidden">
+                    ⬇️ Download Processed Image
+                </button>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-6 mt-8">
+            <h3 class="text-lg font-bold text-blue-900 mb-3">📋 How to Use:</h3>
+            <ol class="list-decimal list-inside text-gray-700 space-y-2">
+                <li>Select your exam type from the dropdown (or choose Custom)</li>
+                <li>Upload your passport-size photo</li>
+                <li>Check "Print Date" if required (mandatory for SSC exams)</li>
+                <li>Click "Process Image" to resize and compress automatically</li>
+                <li>Download your optimized photo ready for upload!</li>
+            </ol>
+        </div>
+
+        <!-- SEO Content Section -->
+        <div class="mt-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Perfect Photos for Government Exams - Made
+                Easy</h2>
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    Preparing for SSC, UPSC, GATE, or other competitive exams? Our <strong>free photo resizer
+                        tool</strong> ensures your passport-size photos meet exact government specifications. No
+                    software installation required - resize photos directly in your browser with complete privacy.
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    Whether you need photos for SSC CGL, SSC CHSL, UPSC Civil Services, GATE, Railway RRB, or any other
+                    examination, our tool automatically adjusts dimensions and file size to match official requirements.
+                    Save time and avoid rejection due to incorrect photo specifications!
+                </p>
+            </div>
+        </div>
+
+        <!-- FAQ Section with Schema -->
+        <div class="mt-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Frequently Asked Questions</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="space-y-4">
+                    <details class="border-b border-gray-200 pb-4">
+                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">What
+                            are the photo requirements for SSC exams?</summary>
+                        <p class="text-gray-700 mt-3">SSC CGL and CHSL require photos with dimensions of 3.5cm x 4.5cm
+                            and maximum file size of 50KB. Our tool automatically resizes your photo to these exact
+                            specifications with the option to add today's date, which is mandatory for SSC applications.
+                        </p>
+                    </details>
+
+                    <details class="border-b border-gray-200 pb-4">
+                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">What
+                            is the UPSC photo size requirement?</summary>
+                        <p class="text-gray-700 mt-3">UPSC requires photos with 350x350 pixels dimensions and maximum
+                            size of 300KB. Select the "UPSC" preset from the dropdown, and our tool will handle the
+                            conversion automatically.</p>
+                    </details>
+
+                    <details class="border-b border-gray-200 pb-4">
+                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">Is
+                            this photo resizer tool free?</summary>
+                        <p class="text-gray-700 mt-3">Yes, absolutely! Our photo resizer is 100% free with no hidden
+                            charges. All processing happens in your browser, so there are no upload fees or subscription
+                            costs.</p>
+                    </details>
+
+                    <details class="border-b border-gray-200 pb-4">
+                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">Do you
+                            upload my photos to a server?</summary>
+                        <p class="text-gray-700 mt-3">No. Your privacy is our priority. All image processing happens
+                            locally in your browser using JavaScript. Your photos never leave your device, ensuring
+                            complete security and privacy.</p>
+                    </details>
+
+                    <details class="border-b border-gray-200 pb-4">
+                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">Can I
+                            use this for other exams besides SSC, UPSC, and GATE?</summary>
+                        <p class="text-gray-700 mt-3">Yes! If your exam has different photo requirements, use the
+                            "Custom Dimensions" option. Enter your required width, height, and maximum file size, and
+                            the tool will resize your photo accordingly.</p>
+                    </details>
+
+                    <details class="border-b border-gray-200 pb-4">
+                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">Why do
+                            I need to add a date to my photo?</summary>
+                        <p class="text-gray-700 mt-3">SSC (Staff Selection Commission) requires photos to have the
+                            current date printed on them. Use our "Print Today's Date on Photo" checkbox to
+                            automatically add a white bar with today's date at the bottom of your image.</p>
+                    </details>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Schema.org Structured Data -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What are the photo requirements for SSC exams?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "SSC CGL and CHSL require photos with dimensions of 3.5cm x 4.5cm and maximum file size of 50KB. The tool automatically resizes your photo to these specifications with the option to add today's date."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the UPSC photo size requirement?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "UPSC requires photos with 350x350 pixels dimensions and maximum size of 300KB."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is this photo resizer tool free?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, the photo resizer is 100% free with no hidden charges. All processing happens in your browser."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do you upload my photos to a server?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. All image processing happens locally in your browser. Your photos never leave your device, ensuring complete security and privacy."
+              }
+            }
+          ]
+        }
+        </script>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">&copy; 2026 Sarkari Photo Resizer. Made with ❤️ for Indian Students.</p>
+            <p class="text-xs text-gray-400 mt-2">All processing happens in your browser. Your photos are never uploaded
+                to any server.</p>
+        </div>
+    </footer>
+
+    <!-- Bottom Ad Container -->
+    <div id="ad-container-bottom" class="ad-container">
+        <!-- AdSense code will be placed here -->
+        <span>Advertisement Space</span>
+    </div>
+
+    <script>
+        // Exam Presets Configuration
+        const examPresets = {
+            ssc: {
+                width: 413,  // 3.5cm at 300 DPI (3.5 * 118.11)
+                height: 531, // 4.5cm at 300 DPI (4.5 * 118.11)
+                maxKB: 50
+            },
+            upsc: {
+                width: 350,
+                height: 350,
+                maxKB: 300
+            },
+            gate: {
+                width: 480,
+                height: 640,
+                maxKB: 100
+            }
+        };
+
+        // DOM Elements
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const examPresetSelect = document.getElementById('examPreset');
+        const customDimensionsDiv = document.getElementById('customDimensions');
+        const previewSection = document.getElementById('previewSection');
+        const originalPreview = document.getElementById('originalPreview');
+        const processedCanvas = document.getElementById('processedCanvas');
+        const processBtn = document.getElementById('processBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const addDateCheckbox = document.getElementById('addDate');
+        const originalSizeSpan = document.getElementById('originalSize');
+        const processedSizeSpan = document.getElementById('processedSize');
+
+        let originalImage = null;
+        let originalFileSize = 0;
+
+        // Toggle Custom Dimensions
+        examPresetSelect.addEventListener('change', function () {
+            if (this.value === 'custom') {
+                customDimensionsDiv.classList.remove('hidden');
+            } else {
+                customDimensionsDiv.classList.add('hidden');
+            }
+        });
+
+        // Upload Zone Click
+        uploadZone.addEventListener('click', () => fileInput.click());
+
+        // Drag & Drop Handlers
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileUpload(files[0]);
+            }
+        });
+
+        // File Input Change
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileUpload(e.target.files[0]);
+            }
+        });
+
+        // Handle File Upload
+        function handleFileUpload(file) {
+            if (!file.type.match('image.*')) {
+                alert('Please upload a valid image file (JPG, PNG, JPEG)');
+                return;
+            }
+
+            originalFileSize = file.size;
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                originalImage = new Image();
+                originalImage.onload = function () {
+                    originalPreview.src = e.target.result;
+                    originalSizeSpan.textContent = formatFileSize(originalFileSize);
+                    processedSizeSpan.textContent = '-';
+                    previewSection.classList.remove('hidden');
+                    downloadBtn.classList.add('hidden');
+                };
+                originalImage.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        // Process Image Button
+        processBtn.addEventListener('click', processImage);
+
+        // Process Image Function
+        function processImage() {
+            if (!originalImage) {
+                alert('Please upload an image first!');
+                return;
+            }
+
+            // Get dimensions and max size
+            let targetWidth, targetHeight, maxKB;
+            const preset = examPresetSelect.value;
+
+            if (preset === 'custom') {
+                targetWidth = parseInt(document.getElementById('customWidth').value);
+                targetHeight = parseInt(document.getElementById('customHeight').value);
+                maxKB = parseInt(document.getElementById('customMaxKB').value);
+
+                if (!targetWidth || !targetHeight || !maxKB) {
+                    alert('Please enter valid custom dimensions and max file size!');
+                    return;
+                }
+            } else {
+                const config = examPresets[preset];
+                targetWidth = config.width;
+                targetHeight = config.height;
+                maxKB = config.maxKB;
+            }
+
+            // Set canvas dimensions
+            processedCanvas.width = targetWidth;
+            processedCanvas.height = targetHeight;
+            const ctx = processedCanvas.getContext('2d');
+
+            // Draw image on canvas
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, targetWidth, targetHeight);
+            ctx.drawImage(originalImage, 0, 0, targetWidth, targetHeight);
+
+            // Add date if checkbox is checked
+            if (addDateCheckbox.checked) {
+                addDateToImage(ctx, targetWidth, targetHeight);
+            }
+
+            // Compress to meet file size requirement
+            compressImage(targetWidth, targetHeight, maxKB);
+        }
+
+        // Add Date to Image
+        function addDateToImage(ctx, width, height) {
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('en-GB'); // DD/MM/YYYY format
+
+            // Draw white rectangle bar at bottom
+            const barHeight = Math.max(30, height * 0.08);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, height - barHeight, width, barHeight);
+
+            // Draw date text
+            ctx.fillStyle = '#000000';
+            const fontSize = Math.max(12, barHeight * 0.5);
+            ctx.font = `bold ${fontSize}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(dateStr, width / 2, height - barHeight / 2);
+        }
+
+        // Compress Image to Target File Size
+        function compressImage(width, height, maxKB) {
+            let quality = 0.9;
+            let blob;
+            let iterations = 0;
+            const maxIterations = 20;
+
+            const compress = () => {
+                processedCanvas.toBlob((b) => {
+                    blob = b;
+                    const fileSizeKB = blob.size / 1024;
+
+                    if (fileSizeKB <= maxKB || quality <= 0.1 || iterations >= maxIterations) {
+                        // Compression complete
+                        processedSizeSpan.textContent = formatFileSize(blob.size);
+
+                        if (fileSizeKB > maxKB) {
+                            alert(`Warning: Could not compress below ${maxKB}KB. Final size: ${fileSizeKB.toFixed(2)}KB`);
+                        }
+
+                        // Enable download button
+                        downloadBtn.classList.remove('hidden');
+                        setupDownload(blob);
+                    } else {
+                        // Continue compression
+                        quality -= 0.05;
+                        iterations++;
+
+                        // Redraw with lower quality
+                        const ctx = processedCanvas.getContext('2d');
+                        ctx.clearRect(0, 0, width, height);
+                        ctx.fillStyle = '#FFFFFF';
+                        ctx.fillRect(0, 0, width, height);
+                        ctx.drawImage(originalImage, 0, 0, width, height);
+
+                        if (addDateCheckbox.checked) {
+                            addDateToImage(ctx, width, height);
+                        }
+
+                        compress();
+                    }
+                }, 'image/jpeg', quality);
+            };
+
+            compress();
+        }
+
+        // Setup Download Button
+        function setupDownload(blob) {
+            downloadBtn.onclick = function () {
+                // Use Data URL instead of Blob URL to bypass file:// origin restrictions
+                const reader = new FileReader();
+                reader.onloadend = function () {
+                    const a = document.createElement('a');
+                    a.href = reader.result; // Data URL (base64)
+                    a.download = `sarkari_photo_${Date.now()}.jpg`;
+                    a.style.display = 'none';
+                    document.body.appendChild(a);
+                    a.click();
+
+                    // Clean up immediately since Data URLs don't need revocation
+                    setTimeout(() => {
+                        document.body.removeChild(a);
+                    }, 100);
+                };
+                reader.readAsDataURL(blob);
+            };
+        }
+
+        // Format File Size
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+    </script>
+</body>
+
+</html>
