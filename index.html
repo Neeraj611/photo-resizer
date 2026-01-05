@@ -59,8 +59,9 @@
     </script>
 
     <!-- Google Search Console Verification -->
-    <!-- TODO: After setting up Search Console, replace the content value below -->
-    <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" /> -->
+    <!-- Get your verification code from: https://search.google.com/search-console -->
+    <!-- Go to Settings > Ownership verification > HTML tag method -->
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" />
 
 
     <!-- Google Analytics -->
@@ -135,6 +136,83 @@
             justify-content: center;
             color: #a0aec0;
             font-size: 14px;
+        }
+
+        /* Crop Section Styles */
+        .crop-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            background: #f7fafc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .crop-canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            cursor: crosshair;
+        }
+
+        .crop-overlay {
+            position: absolute;
+            border: 2px dashed #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            cursor: move;
+            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+        }
+
+        .crop-handle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        .crop-handle.nw {
+            top: -5px;
+            left: -5px;
+            cursor: nw-resize;
+        }
+
+        .crop-handle.ne {
+            top: -5px;
+            right: -5px;
+            cursor: ne-resize;
+        }
+
+        .crop-handle.sw {
+            bottom: -5px;
+            left: -5px;
+            cursor: sw-resize;
+        }
+
+        .crop-handle.se {
+            bottom: -5px;
+            right: -5px;
+            cursor: se-resize;
+        }
+
+        .crop-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+
+        .crop-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .skip-btn {
+            background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
+        }
+
+        .skip-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(74, 85, 104, 0.3);
         }
     </style>
 </head>
@@ -223,6 +301,26 @@
                 </svg>
                 <p class="text-lg font-semibold text-gray-700 mb-2">Click to Upload or Drag & Drop</p>
                 <p class="text-sm text-gray-500">Supports: JPG, PNG, JPEG</p>
+            </div>
+        </div>
+
+        <!-- Crop Section (New) -->
+        <div id="cropSection" class="bg-white rounded-lg shadow-md p-6 mb-8 hidden">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">✂️ Crop Your Photo</h2>
+            <p class="text-gray-600 mb-4">Drag to select the area you want to keep. Position your face in the center for
+                best results.</p>
+
+            <div class="crop-container mb-6">
+                <canvas id="cropCanvas" class="crop-canvas"></canvas>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button id="applyCropBtn" class="crop-btn text-white font-bold py-3 px-8 rounded-lg text-lg">
+                    ✓ Apply Crop
+                </button>
+                <button id="skipCropBtn" class="skip-btn text-white font-bold py-3 px-8 rounded-lg text-lg">
+                    ⏭️ Skip Crop
+                </button>
             </div>
         </div>
 
@@ -457,8 +555,19 @@
         const originalSizeSpan = document.getElementById('originalSize');
         const processedSizeSpan = document.getElementById('processedSize');
 
+        // Crop Section Elements
+        const cropSection = document.getElementById('cropSection');
+        const cropCanvas = document.getElementById('cropCanvas');
+        const applyCropBtn = document.getElementById('applyCropBtn');
+        const skipCropBtn = document.getElementById('skipCropBtn');
+
         let originalImage = null;
         let originalFileSize = 0;
+        let croppedImage = null; // Store cropped version
+        let cropData = { x: 0, y: 0, width: 0, height: 0 }; // Crop selection data
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
 
         // Toggle Custom Dimensions
         examPresetSelect.addEventListener('change', function () {
@@ -511,17 +620,163 @@
             reader.onload = function (e) {
                 originalImage = new Image();
                 originalImage.onload = function () {
-                    originalPreview.src = e.target.result;
+                    // Show crop section instead of preview
+                    showCropSection();
                     originalSizeSpan.textContent = formatFileSize(originalFileSize);
                     processedSizeSpan.textContent = '-';
-                    previewSection.classList.remove('hidden');
-                    downloadBtn.classList.add('hidden');
                 };
                 originalImage.src = e.target.result;
             };
 
             reader.readAsDataURL(file);
         }
+
+        // Show Crop Section
+        function showCropSection() {
+            // Hide other sections
+            previewSection.classList.add('hidden');
+            cropSection.classList.remove('hidden');
+
+            // Set up crop canvas
+            const ctx = cropCanvas.getContext('2d');
+            const maxWidth = 800;
+            const scale = originalImage.width > maxWidth ? maxWidth / originalImage.width : 1;
+
+            cropCanvas.width = originalImage.width * scale;
+            cropCanvas.height = originalImage.height * scale;
+
+            // Draw image on canvas
+            ctx.drawImage(originalImage, 0, 0, cropCanvas.width, cropCanvas.height);
+
+            // Initialize crop selection (centered, 80% of image)
+            const cropWidth = cropCanvas.width * 0.8;
+            const cropHeight = cropCanvas.height * 0.8;
+            cropData = {
+                x: (cropCanvas.width - cropWidth) / 2,
+                y: (cropCanvas.height - cropHeight) / 2,
+                width: cropWidth,
+                height: cropHeight
+            };
+
+            drawCropOverlay();
+            setupCropDrag();
+        }
+
+        // Draw crop selection overlay
+        function drawCropOverlay() {
+            const ctx = cropCanvas.getContext('2d');
+
+            // Redraw original image
+            ctx.clearRect(0, 0, cropCanvas.width, cropCanvas.height);
+            ctx.drawImage(originalImage, 0, 0, cropCanvas.width, cropCanvas.height);
+
+            // Draw darkened overlay outside crop area
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            ctx.fillRect(0, 0, cropCanvas.width, cropData.y); // Top
+            ctx.fillRect(0, cropData.y, cropData.x, cropData.height); // Left
+            ctx.fillRect(cropData.x + cropData.width, cropData.y, cropCanvas.width - (cropData.x + cropData.width), cropData.height); // Right
+            ctx.fillRect(0, cropData.y + cropData.height, cropCanvas.width, cropCanvas.height - (cropData.y + cropData.height)); // Bottom
+
+            // Draw crop box border
+            ctx.strokeStyle = '#667eea';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.strokeRect(cropData.x, cropData.y, cropData.width, cropData.height);
+            ctx.setLineDash([]);
+        }
+
+        // Setup drag functionality for crop box
+        function setupCropDrag() {
+            let isResizing = false;
+            let resizeHandle = '';
+
+            cropCanvas.addEventListener('mousedown', (e) => {
+                const rect = cropCanvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Check if mouse is inside crop box
+                if (x >= cropData.x && x <= cropData.x + cropData.width &&
+                    y >= cropData.y && y <= cropData.y + cropData.height) {
+                    isDragging = true;
+                    dragStartX = x - cropData.x;
+                    dragStartY = y - cropData.y;
+                }
+            });
+
+            cropCanvas.addEventListener('mousemove', (e) => {
+                if (isDragging) {
+                    const rect = cropCanvas.getBoundingClientRect();
+                    let newX = e.clientX - rect.left - dragStartX;
+                    let newY = e.clientY - rect.top - dragStartY;
+
+                    // Keep crop box within canvas bounds
+                    newX = Math.max(0, Math.min(newX, cropCanvas.width - cropData.width));
+                    newY = Math.max(0, Math.min(newY, cropCanvas.height - cropData.height));
+
+                    cropData.x = newX;
+                    cropData.y = newY;
+                    drawCropOverlay();
+                }
+            });
+
+            cropCanvas.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+
+            cropCanvas.addEventListener('mouseleave', () => {
+                isDragging = false;
+            });
+        }
+
+        // Apply Crop Button
+        applyCropBtn.addEventListener('click', function () {
+            // Calculate scale factor between canvas and original image
+            const scale = originalImage.width / cropCanvas.width;
+
+            // Create new canvas for cropped image
+            const cropOutputCanvas = document.createElement('canvas');
+            const cropOutputCtx = cropOutputCanvas.getContext('2d');
+
+            // Set dimensions based on crop selection
+            const cropWidthOriginal = cropData.width * scale;
+            const cropHeightOriginal = cropData.height * scale;
+            const cropXOriginal = cropData.x * scale;
+            const cropYOriginal = cropData.y * scale;
+
+            cropOutputCanvas.width = cropWidthOriginal;
+            cropOutputCanvas.height = cropHeightOriginal;
+
+            // Draw cropped portion
+            cropOutputCtx.drawImage(
+                originalImage,
+                cropXOriginal, cropYOriginal, cropWidthOriginal, cropHeightOriginal,
+                0, 0, cropWidthOriginal, cropHeightOriginal
+            );
+
+            // Create new image from cropped canvas
+            croppedImage = new Image();
+            croppedImage.onload = function () {
+                // Update original image to cropped version
+                originalImage = croppedImage;
+
+                // Show preview section
+                cropSection.classList.add('hidden');
+                previewSection.classList.remove('hidden');
+                originalPreview.src = croppedImage.src;
+                downloadBtn.classList.add('hidden');
+            };
+            croppedImage.src = cropOutputCanvas.toDataURL('image/jpeg', 0.95);
+        });
+
+        // Skip Crop Button
+        skipCropBtn.addEventListener('click', function () {
+            // Skip cropping, go directly to preview
+            cropSection.classList.add('hidden');
+            previewSection.classList.remove('hidden');
+            originalPreview.src = originalImage.src;
+            downloadBtn.classList.add('hidden');
+        });
 
         // Process Image Button
         processBtn.addEventListener('click', processImage);
