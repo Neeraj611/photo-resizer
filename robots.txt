@@ -1,9 +1,9 @@
 User-agent: *
 Allow: /
+
+# Sitemap for Google Search Console
 Sitemap: https://neeraj611.github.io/photo-resizer/sitemap.xml
 
-# Optimize crawl rate
-Crawl-delay: 1
-
-# Block sensitive paths (if any)
-# Disallow: /admin/
+# Block unnecessary files from indexing (optional)
+Disallow: /*.json$
+Disallow: /*.map$
