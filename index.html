@@ -279,6 +279,44 @@
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(74, 85, 104, 0.3);
         }
+
+        /* Sidebar Ad Containers */
+        .sidebar-ad {
+            position: sticky;
+            top: 20px;
+            min-height: 600px;
+            max-width: 300px;
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a0aec0;
+            font-size: 14px;
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1280px) {
+            .sidebar-ad {
+                display: none;
+            }
+        }
+
+        .main-content-wrapper {
+            display: grid;
+            grid-template-columns: 300px 1fr 300px;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1280px) {
+            .main-content-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
@@ -301,517 +339,583 @@
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8 max-w-6xl">
-
-        <!-- Exam Preset Selection -->
-        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Select Exam Type</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                    <label for="examPreset" class="block text-sm font-medium text-gray-700 mb-2">Choose Exam
-                        Preset:</label>
-                    <select id="examPreset"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-                        <option value="ssc">SSC CGL/CHSL (3.5cm x 4.5cm, Max 50KB)</option>
-                        <option value="upsc">UPSC CSE (350x350 pixels, Max 300KB)</option>
-                        <option value="railway">Railway RRB (3.5cm x 4.5cm, Max 40KB)</option>
-                        <option value="banking">Banking IBPS (200x230 pixels, Max 50KB)</option>
-                        <option value="gate">GATE (480x640 pixels, Max 100KB)</option>
-                        <option value="custom">Custom Dimensions</option>
-                    </select>
-                </div>
-
-                <!-- Add Date Checkbox -->
-                <div class="flex items-center">
-                    <input type="checkbox" id="addDate"
-                        class="w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
-                    <label for="addDate" class="ml-3 text-sm font-medium text-gray-700">
-                        📅 Print Today's Date on Photo? <span class="text-xs text-gray-500">(Required for SSC)</span>
-                    </label>
-                </div>
+    <!-- Main Content with Sidebar Ads -->
+    <div class="main-content-wrapper px-4 py-8">
+        <!-- Left Sidebar Ad -->
+        <aside class="sidebar-ad">
+            <!-- AdSense Left Sidebar -->
+            <div class="text-center">
+                <p class="font-semibold text-gray-500">Advertisement</p>
+                <p class="text-xs mt-2">300x600</p>
+                <!-- Your AdSense code here -->
             </div>
+        </aside>
 
-            <!-- Custom Dimensions (Hidden by default) -->
-            <div id="customDimensions" class="mt-4 hidden">
-                <h3 class="text-lg font-semibold text-gray-800 mb-3">Custom Dimensions</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div>
-                        <label for="customWidth" class="block text-sm font-medium text-gray-700 mb-1">Width
-                            (pixels):</label>
-                        <input type="number" id="customWidth" placeholder="e.g., 350"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
-                    </div>
-                    <div>
-                        <label for="customHeight" class="block text-sm font-medium text-gray-700 mb-1">Height
-                            (pixels):</label>
-                        <input type="number" id="customHeight" placeholder="e.g., 350"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
-                    </div>
-                    <div>
-                        <label for="customMaxKB" class="block text-sm font-medium text-gray-700 mb-1">Max Size
-                            (KB):</label>
-                        <input type="number" id="customMaxKB" placeholder="e.g., 100"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Main Content -->
+        <main class="max-w-6xl">
 
-        <!-- Upload Zone -->
-        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Upload Your Photo</h2>
-            <div id="uploadZone" class="upload-zone rounded-lg p-12 text-center cursor-pointer">
-                <input type="file" id="fileInput" accept="image/*" class="hidden">
-                <svg class="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
-                    </path>
-                </svg>
-                <p class="text-lg font-semibold text-gray-700 mb-2">Click to Upload or Drag & Drop</p>
-                <p class="text-sm text-gray-500">Supports: JPG, PNG, JPEG</p>
-            </div>
-        </div>
-
-        <!-- Crop Section (New) -->
-        <div id="cropSection" class="bg-white rounded-lg shadow-md p-6 mb-8 hidden">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">✂️ Crop Your Photo</h2>
-            <p class="text-gray-600 mb-4">Drag to select the area you want to keep. Position your face in the center for
-                best results.</p>
-
-            <div class="crop-container mb-6">
-                <canvas id="cropCanvas" class="crop-canvas"></canvas>
-            </div>
-
-            <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <button id="applyCropBtn" class="crop-btn text-white font-bold py-3 px-8 rounded-lg text-lg">
-                    ✓ Apply Crop
-                </button>
-                <button id="skipCropBtn" class="skip-btn text-white font-bold py-3 px-8 rounded-lg text-lg">
-                    ⏭️ Skip Crop
-                </button>
-            </div>
-        </div>
-
-        <!-- Preview & Stats Section -->
-        <div id="previewSection" class="hidden">
-            <!-- File Stats -->
+            <!-- Exam Preset Selection -->
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">File Statistics</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Select Exam Type</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg p-4">
-                        <p class="text-sm opacity-90">Original Size</p>
-                        <p id="originalSize" class="text-2xl font-bold">-</p>
+                    <div>
+                        <label for="examPreset" class="block text-sm font-medium text-gray-700 mb-2">Choose Exam
+                            Preset:</label>
+                        <select id="examPreset"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            <option value="ssc">SSC CGL/CHSL (3.5cm x 4.5cm, Max 50KB)</option>
+                            <option value="upsc">UPSC CSE (350x350 pixels, Max 300KB)</option>
+                            <option value="railway">Railway RRB (3.5cm x 4.5cm, Max 40KB)</option>
+                            <option value="banking">Banking IBPS (200x230 pixels, Max 50KB)</option>
+                            <option value="gate">GATE (480x640 pixels, Max 100KB)</option>
+                            <option value="custom">Custom Dimensions</option>
+                        </select>
                     </div>
-                    <div class="stat-badge text-white rounded-lg p-4">
-                        <p class="text-sm opacity-90">Processed Size</p>
-                        <p id="processedSize" class="text-2xl font-bold">-</p>
+
+                    <!-- Add Date Checkbox -->
+                    <div class="flex items-center">
+                        <input type="checkbox" id="addDate"
+                            class="w-5 h-5 text-purple-600 border-gray-300 rounded focus:ring-purple-500">
+                        <label for="addDate" class="ml-3 text-sm font-medium text-gray-700">
+                            📅 Print Today's Date on Photo? <span class="text-xs text-gray-500">(Required for
+                                SSC)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Custom Dimensions (Hidden by default) -->
+                <div id="customDimensions" class="mt-4 hidden">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-3">Custom Dimensions</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="customWidth" class="block text-sm font-medium text-gray-700 mb-1">Width
+                                (pixels):</label>
+                            <input type="number" id="customWidth" placeholder="e.g., 350"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                        </div>
+                        <div>
+                            <label for="customHeight" class="block text-sm font-medium text-gray-700 mb-1">Height
+                                (pixels):</label>
+                            <input type="number" id="customHeight" placeholder="e.g., 350"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                        </div>
+                        <div>
+                            <label for="customMaxKB" class="block text-sm font-medium text-gray-700 mb-1">Max Size
+                                (KB):</label>
+                            <input type="number" id="customMaxKB" placeholder="e.g., 100"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Image Preview -->
+            <!-- Upload Zone -->
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">Image Preview</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Upload Your Photo</h2>
+                <div id="uploadZone" class="upload-zone rounded-lg p-12 text-center cursor-pointer">
+                    <input type="file" id="fileInput" accept="image/*" class="hidden">
+                    <svg class="mx-auto h-16 w-16 text-gray-400 mb-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                        </path>
+                    </svg>
+                    <p class="text-lg font-semibold text-gray-700 mb-2">Click to Upload or Drag & Drop</p>
+                    <p class="text-sm text-gray-500">Supports: JPG, PNG, JPEG</p>
+                </div>
+            </div>
+
+            <!-- Crop Section (New) -->
+            <div id="cropSection" class="bg-white rounded-lg shadow-md p-6 mb-8 hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">✂️ Crop Your Photo</h2>
+                <p class="text-gray-600 mb-4">Drag to select the area you want to keep. Position your face in the center
+                    for
+                    best results.</p>
+
+                <div class="crop-container mb-6">
+                    <canvas id="cropCanvas" class="crop-canvas"></canvas>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <button id="applyCropBtn" class="crop-btn text-white font-bold py-3 px-8 rounded-lg text-lg">
+                        ✓ Apply Crop
+                    </button>
+                    <button id="skipCropBtn" class="skip-btn text-white font-bold py-3 px-8 rounded-lg text-lg">
+                        ⏭️ Skip Crop
+                    </button>
+                </div>
+            </div>
+
+            <!-- Preview & Stats Section -->
+            <div id="previewSection" class="hidden">
+                <!-- File Stats -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">File Statistics</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg p-4">
+                            <p class="text-sm opacity-90">Original Size</p>
+                            <p id="originalSize" class="text-2xl font-bold">-</p>
+                        </div>
+                        <div class="stat-badge text-white rounded-lg p-4">
+                            <p class="text-sm opacity-90">Processed Size</p>
+                            <p id="processedSize" class="text-2xl font-bold">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Preview -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Image Preview</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Original Image -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-700 mb-3">Original Image</h3>
+                            <div
+                                class="preview-container border border-gray-300 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                                <img id="originalPreview" src="" alt="Original" class="max-w-full h-auto">
+                            </div>
+                        </div>
+
+                        <!-- Processed Image -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-700 mb-3">Processed Image</h3>
+                            <div
+                                class="preview-container border border-gray-300 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
+                                <canvas id="processedCanvas" class="max-w-full h-auto"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <button id="processBtn" class="process-btn text-white font-bold py-4 px-8 rounded-lg text-lg">
+                        ⚡ Process Image
+                    </button>
+                    <button id="downloadBtn"
+                        class="download-btn text-white font-bold py-4 px-8 rounded-lg text-lg hidden">
+                        ⬇️ Download Processed Image
+                    </button>
+                </div>
+            </div>
+
+            <!-- How It Works Section (SEO-Optimized) -->
+            <div class="mt-12 mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">How to Resize Photos for Government Exams
+                    in 3
+                    Easy Steps</h2>
+                <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg shadow-md p-8 mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="text-5xl mb-3">📤</div>
+                            <h3 class="text-xl font-bold mb-2">1. Upload Photo</h3>
+                            <p class="text-gray-700">Select your passport-size photo from phone/computer. No upload to
+                                server - 100% private and free forever.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-5xl mb-3">⚙️</div>
+                            <h3 class="text-xl font-bold mb-2">2. Choose Exam</h3>
+                            <p class="text-gray-700">Select SSC, UPSC, Railway, Banking or your specific government exam
+                                preset. Resize to exact dimensions instantly.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-5xl mb-3">⬇️</div>
+                            <h3 class="text-xl font-bold mb-2">3. Download Instantly</h3>
+                            <p class="text-gray-700">Get perfectly sized photo in exact KB for your Sarkari Naukri
+                                application form. Completely free, no registration required.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-6 mt-8">
+                <h3 class="text-lg font-bold text-blue-900 mb-3">📋 How to Use:</h3>
+                <ol class="list-decimal list-inside text-gray-700 space-y-2">
+                    <li>Select your exam type from the dropdown (or choose Custom)</li>
+                    <li>Upload your passport-size photo</li>
+                    <li>Check "Print Date" if required (mandatory for SSC exams)</li>
+                    <li>Click "Process Image" to resize and compress automatically</li>
+                    <li>Download your optimized photo ready for upload!</li>
+                </ol>
+            </div>
+
+            <!-- SEO Content Section -->
+            <div class="mt-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Perfect Photos for Indian Government Exams
+                    -
+                    Made Easy</h2>
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Preparing for <strong>SSC, UPSC, Railway RRB, Banking IBPS, GATE</strong>, or other competitive
+                        exams in India? Our <strong>free photo resizer tool</strong> ensures your passport-size photos
+                        meet
+                        exact government specifications for <strong>Sarkari Naukri</strong> applications. No software
+                        installation required - resize photos directly in your browser with complete privacy.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Whether you need photos for SSC CGL, SSC CHSL, UPSC Civil Services, Railway RRB NTPC, Banking
+                        IBPS
+                        PO/Clerk, GATE, Defence exams, or any other government examination across India, our tool
+                        automatically adjusts dimensions and file size to match official requirements. Save time and
+                        avoid
+                        rejection due to incorrect photo specifications! <strong>All India - Hindi & English</strong>
+                        support.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Exam-Specific Photo Guidelines Section -->
+            <div class="mt-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Indian Government Exam Photo Requirements
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- SSC Guide -->
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-purple-800 mb-3">📋 SSC CGL / CHSL Photo</h3>
+                        <ul class="text-gray-700 space-y-2 text-sm">
+                            <li><strong>Size:</strong> 3.5cm x 4.5cm (413x531 pixels)</li>
+                            <li><strong>Max File:</strong> 50KB</li>
+                            <li><strong>Format:</strong> JPG/JPEG</li>
+                            <li><strong>Special:</strong> Date watermark mandatory</li>
+                            <li><strong>Background:</strong> White/light colored</li>
+                        </ul>
+                        <p class="text-xs text-gray-600 mt-3"><strong>Pro Tip:</strong> Use our crop tool to center your
+                            face, then select "SSC" preset and check "Print Date" option.</p>
+                    </div>
+
+                    <!-- UPSC Guide -->
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-blue-800 mb-3">🎓 UPSC CSE Photo</h3>
+                        <ul class="text-gray-700 space-y-2 text-sm">
+                            <li><strong>Size:</strong> 350x350 pixels (square)</li>
+                            <li><strong>Max File:</strong> 300KB</li>
+                            <li><strong>Format:</strong> JPG/JPEG</li>
+                            <li><strong>Quality:</strong> Clear passport-style photo</li>
+                            <li><strong>Background:</strong> Plain light background</li>
+                        </ul>
+                        <p class="text-xs text-gray-600 mt-3"><strong>Pro Tip:</strong> Crop to square aspect ratio
+                            first,
+                            then select "UPSC CSE" preset for perfect dimensions.</p>
+                    </div>
+
+                    <!-- Railway Guide -->
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-green-800 mb-3">🚂 Railway RRB Photo</h3>
+                        <ul class="text-gray-700 space-y-2 text-sm">
+                            <li><strong>Size:</strong> 3.5cm x 4.5cm (413x531 pixels)</li>
+                            <li><strong>Max File:</strong> 40KB (stricter than SSC!)</li>
+                            <li><strong>Format:</strong> JPG/JPEG</li>
+                            <li><strong>Exams:</strong> NTPC, Group D, ALP, RPF</li>
+                            <li><strong>Background:</strong> White preferred</li>
+                        </ul>
+                        <p class="text-xs text-gray-600 mt-3"><strong>Pro Tip:</strong> Railway has the strictest file
+                            size.
+                            Our tool auto-compresses to 40KB without quality loss.</p>
+                    </div>
+
+                    <!-- Banking Guide -->
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-orange-800 mb-3">🏦 Banking IBPS Photo</h3>
+                        <ul class="text-gray-700 space-y-2 text-sm">
+                            <li><strong>Size:</strong> 200x230 pixels</li>
+                            <li><strong>Max File:</strong> 50KB</li>
+                            <li><strong>Format:</strong> JPG/JPEG</li>
+                            <li><strong>Exams:</strong> PO, Clerk, SO, RRB</li>
+                            <li><strong>Aspect:</strong> Passport-style photo</li>
+                        </ul>
+                        <p class="text-xs text-gray-600 mt-3"><strong>Pro Tip:</strong> Smaller dimensions mean better
+                            quality. Upload high-res photo and use our crop tool.</p>
+                    </div>
+
+                    <!-- GATE Guide -->
+                    <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-red-800 mb-3">⚙️ GATE Photo</h3>
+                        <ul class="text-gray-700 space-y-2 text-sm">
+                            <li><strong>Size:</strong> 480x640 pixels (3:4 ratio)</li>
+                            <li><strong>Max File:</strong> 100KB</li>
+                            <li><strong>Format:</strong> JPG/JPEG</li>
+                            <li><strong>Quality:</strong> High clarity required</li>
+                            <li><strong>Background:</strong> Plain white</li>
+                        </ul>
+                        <p class="text-xs text-gray-600 mt-3"><strong>Pro Tip:</strong> GATE allows larger files.
+                            Maintain
+                            good quality while staying under 100KB limit.</p>
+                    </div>
+
+                    <!-- Custom Option -->
+                    <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg shadow-md p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">🔧 Other Exams</h3>
+                        <ul class="text-gray-700 space-y-2 text-sm">
+                            <li><strong>NDA/CDS:</strong> Use custom dimensions</li>
+                            <li><strong>State PSC:</strong> Varies by state</li>
+                            <li><strong>NTA Exams:</strong> JEE, NEET, UGC NET</li>
+                            <li><strong>Defence:</strong> AFCAT, CAPF, CDS</li>
+                            <li><strong>University:</strong> Various entrance exams</li>
+                        </ul>
+                        <p class="text-xs text-gray-600 mt-3"><strong>Pro Tip:</strong> Use "Custom Dimensions" option
+                            and
+                            enter your exam's exact requirements.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Choose Sarkari Photo Resizer Section -->
+            <div class="mt-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Why 40M+ Indian Students Trust Sarkari
+                    Photo
+                    Resizer</h2>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Original Image -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-700 mb-3">Original Image</h3>
-                        <div
-                            class="preview-container border border-gray-300 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
-                            <img id="originalPreview" src="" alt="Original" class="max-w-full h-auto">
+                    <!-- Benefit 1 -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-start">
+                            <div class="text-4xl mr-4">✂️</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Professional Crop Tool</h3>
+                                <p class="text-gray-700">Our interactive crop feature lets you select the exact area of
+                                    your
+                                    photo to keep. Perfect for converting full-body photos or landscape images into
+                                    passport-style photos required by Sarkari exams. Drag, position, and apply—all in
+                                    your
+                                    browser.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Processed Image -->
-                    <div>
-                        <h3 class="text-lg font-semibold text-gray-700 mb-3">Processed Image</h3>
-                        <div
-                            class="preview-container border border-gray-300 rounded-lg overflow-hidden bg-gray-100 flex items-center justify-center">
-                            <canvas id="processedCanvas" class="max-w-full h-auto"></canvas>
+                    <!-- Benefit 2 -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-start">
+                            <div class="text-4xl mr-4">🇮🇳</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Built for India</h3>
+                                <p class="text-gray-700">Pre-configured for all major Indian government exams: SSC,
+                                    UPSC,
+                                    Railway RRB, Banking IBPS, GATE, Defence, and more. No need to manually enter
+                                    dimensions
+                                    or file sizes—just select your exam and we handle the rest. Supports all Sarkari
+                                    Naukri
+                                    photo requirements.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Benefit 3 -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-start">
+                            <div class="text-4xl mr-4">💰</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Completely Free Forever</h3>
+                                <p class="text-gray-700">Why pay ₹50-200 to photo studios for each exam application? Our
+                                    tool is 100% free with no hidden costs, no registration, and no subscriptions. Save
+                                    money while applying for multiple government exams across India. Process unlimited
+                                    photos anytime.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Benefit 4 -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-start">
+                            <div class="text-4xl mr-4">🔒</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Your Privacy, Guaranteed</h3>
+                                <p class="text-gray-700">Unlike other online photo editors, we never upload your photos
+                                    to
+                                    any server. All processing happens locally in your browser using JavaScript Canvas
+                                    API.
+                                    Your personal photos stay on your device. No data collection, no tracking, no
+                                    privacy
+                                    risks.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Benefit 5 -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-start">
+                            <div class="text-4xl mr-4">⚡</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">Instant Results</h3>
+                                <p class="text-gray-700">No waiting, no queues. Upload your photo, crop if needed,
+                                    select
+                                    exam type, and get your processed photo in seconds. Smart compression ensures your
+                                    photo
+                                    meets exact KB requirements without quality loss. Download and use immediately in
+                                    your
+                                    exam application.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Benefit 6 -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="flex items-start">
+                            <div class="text-4xl mr-4">📅</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800 mb-2">SSC Date Watermark</h3>
+                                <p class="text-gray-700">SSC requires photos with current date printed. Our tool
+                                    automatically adds a professional white date watermark at the bottom of your photo
+                                    with
+                                    one click. No Photoshop needed—perfect for SSC CGL, CHSL, MTS, and other Staff
+                                    Selection
+                                    Commission exams.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="flex flex-col md:flex-row gap-4 justify-center">
-                <button id="processBtn" class="process-btn text-white font-bold py-4 px-8 rounded-lg text-lg">
-                    ⚡ Process Image
-                </button>
-                <button id="downloadBtn" class="download-btn text-white font-bold py-4 px-8 rounded-lg text-lg hidden">
-                    ⬇️ Download Processed Image
-                </button>
-            </div>
-        </div>
-
-        <!-- How It Works Section (SEO-Optimized) -->
-        <div class="mt-12 mb-8">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">How to Resize Photos for Government Exams in 3
-                Easy Steps</h2>
-            <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg shadow-md p-8 mb-8">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="text-center">
-                        <div class="text-5xl mb-3">📤</div>
-                        <h3 class="text-xl font-bold mb-2">1. Upload Photo</h3>
-                        <p class="text-gray-700">Select your passport-size photo from phone/computer. No upload to
-                            server - 100% private and free forever.</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-5xl mb-3">⚙️</div>
-                        <h3 class="text-xl font-bold mb-2">2. Choose Exam</h3>
-                        <p class="text-gray-700">Select SSC, UPSC, Railway, Banking or your specific government exam
-                            preset. Resize to exact dimensions instantly.</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-5xl mb-3">⬇️</div>
-                        <h3 class="text-xl font-bold mb-2">3. Download Instantly</h3>
-                        <p class="text-gray-700">Get perfectly sized photo in exact KB for your Sarkari Naukri
-                            application form. Completely free, no registration required.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Instructions -->
-        <div class="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-6 mt-8">
-            <h3 class="text-lg font-bold text-blue-900 mb-3">📋 How to Use:</h3>
-            <ol class="list-decimal list-inside text-gray-700 space-y-2">
-                <li>Select your exam type from the dropdown (or choose Custom)</li>
-                <li>Upload your passport-size photo</li>
-                <li>Check "Print Date" if required (mandatory for SSC exams)</li>
-                <li>Click "Process Image" to resize and compress automatically</li>
-                <li>Download your optimized photo ready for upload!</li>
-            </ol>
-        </div>
-
-        <!-- SEO Content Section -->
-        <div class="mt-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Perfect Photos for Indian Government Exams -
-                Made Easy</h2>
-            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
-                <p class="text-gray-700 leading-relaxed mb-4">
-                    Preparing for <strong>SSC, UPSC, Railway RRB, Banking IBPS, GATE</strong>, or other competitive
-                    exams in India? Our <strong>free photo resizer tool</strong> ensures your passport-size photos meet
-                    exact government specifications for <strong>Sarkari Naukri</strong> applications. No software
-                    installation required - resize photos directly in your browser with complete privacy.
-                </p>
-                <p class="text-gray-700 leading-relaxed">
-                    Whether you need photos for SSC CGL, SSC CHSL, UPSC Civil Services, Railway RRB NTPC, Banking IBPS
-                    PO/Clerk, GATE, Defence exams, or any other government examination across India, our tool
-                    automatically adjusts dimensions and file size to match official requirements. Save time and avoid
-                    rejection due to incorrect photo specifications! <strong>All India - Hindi & English</strong>
-                    support.
-                </p>
-            </div>
-        </div>
-
-        <!-- Exam-Specific Photo Guidelines Section -->
-        <div class="mt-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Indian Government Exam Photo Requirements</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- SSC Guide -->
-                <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-bold text-purple-800 mb-3">📋 SSC CGL / CHSL Photo</h3>
-                    <ul class="text-gray-700 space-y-2 text-sm">
-                        <li><strong>Size:</strong> 3.5cm x 4.5cm (413x531 pixels)</li>
-                        <li><strong>Max File:</strong> 50KB</li>
-                        <li><strong>Format:</strong> JPG/JPEG</li>
-                        <li><strong>Special:</strong> Date watermark mandatory</li>
-                        <li><strong>Background:</strong> White/light colored</li>
-                    </ul>
-                    <p class="text-xs text-gray-600 mt-3"><strong>Pro Tip:</strong> Use our crop tool to center your
-                        face, then select "SSC" preset and check "Print Date" option.</p>
-                </div>
-
-                <!-- UPSC Guide -->
-                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-bold text-blue-800 mb-3">🎓 UPSC CSE Photo</h3>
-                    <ul class="text-gray-700 space-y-2 text-sm">
-                        <li><strong>Size:</strong> 350x350 pixels (square)</li>
-                        <li><strong>Max File:</strong> 300KB</li>
-                        <li><strong>Format:</strong> JPG/JPEG</li>
-                        <li><strong>Quality:</strong> Clear passport-style photo</li>
-                        <li><strong>Background:</strong> Plain light background</li>
-                    </ul>
-                    <p class="text-xs text-gray-600 mt-3"><strong>Pro Tip:</strong> Crop to square aspect ratio first,
-                        then select "UPSC CSE" preset for perfect dimensions.</p>
-                </div>
-
-                <!-- Railway Guide -->
-                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-bold text-green-800 mb-3">🚂 Railway RRB Photo</h3>
-                    <ul class="text-gray-700 space-y-2 text-sm">
-                        <li><strong>Size:</strong> 3.5cm x 4.5cm (413x531 pixels)</li>
-                        <li><strong>Max File:</strong> 40KB (stricter than SSC!)</li>
-                        <li><strong>Format:</strong> JPG/JPEG</li>
-                        <li><strong>Exams:</strong> NTPC, Group D, ALP, RPF</li>
-                        <li><strong>Background:</strong> White preferred</li>
-                    </ul>
-                    <p class="text-xs text-gray-600 mt-3"><strong>Pro Tip:</strong> Railway has the strictest file size.
-                        Our tool auto-compresses to 40KB without quality loss.</p>
-                </div>
-
-                <!-- Banking Guide -->
-                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-bold text-orange-800 mb-3">🏦 Banking IBPS Photo</h3>
-                    <ul class="text-gray-700 space-y-2 text-sm">
-                        <li><strong>Size:</strong> 200x230 pixels</li>
-                        <li><strong>Max File:</strong> 50KB</li>
-                        <li><strong>Format:</strong> JPG/JPEG</li>
-                        <li><strong>Exams:</strong> PO, Clerk, SO, RRB</li>
-                        <li><strong>Aspect:</strong> Passport-style photo</li>
-                    </ul>
-                    <p class="text-xs text-gray-600 mt-3"><strong>Pro Tip:</strong> Smaller dimensions mean better
-                        quality. Upload high-res photo and use our crop tool.</p>
-                </div>
-
-                <!-- GATE Guide -->
-                <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-bold text-red-800 mb-3">⚙️ GATE Photo</h3>
-                    <ul class="text-gray-700 space-y-2 text-sm">
-                        <li><strong>Size:</strong> 480x640 pixels (3:4 ratio)</li>
-                        <li><strong>Max File:</strong> 100KB</li>
-                        <li><strong>Format:</strong> JPG/JPEG</li>
-                        <li><strong>Quality:</strong> High clarity required</li>
-                        <li><strong>Background:</strong> Plain white</li>
-                    </ul>
-                    <p class="text-xs text-gray-600 mt-3"><strong>Pro Tip:</strong> GATE allows larger files. Maintain
-                        good quality while staying under 100KB limit.</p>
-                </div>
-
-                <!-- Custom Option -->
-                <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg shadow-md p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">🔧 Other Exams</h3>
-                    <ul class="text-gray-700 space-y-2 text-sm">
-                        <li><strong>NDA/CDS:</strong> Use custom dimensions</li>
-                        <li><strong>State PSC:</strong> Varies by state</li>
-                        <li><strong>NTA Exams:</strong> JEE, NEET, UGC NET</li>
-                        <li><strong>Defence:</strong> AFCAT, CAPF, CDS</li>
-                        <li><strong>University:</strong> Various entrance exams</li>
-                    </ul>
-                    <p class="text-xs text-gray-600 mt-3"><strong>Pro Tip:</strong> Use "Custom Dimensions" option and
-                        enter your exam's exact requirements.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Why Choose Sarkari Photo Resizer Section -->
-        <div class="mt-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Why 40M+ Indian Students Trust Sarkari Photo
-                Resizer</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Benefit 1 -->
+            <!-- FAQ Section with Schema -->
+            <div class="mt-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Frequently Asked Questions</h2>
                 <div class="bg-white rounded-lg shadow-md p-6">
-                    <div class="flex items-start">
-                        <div class="text-4xl mr-4">✂️</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Professional Crop Tool</h3>
-                            <p class="text-gray-700">Our interactive crop feature lets you select the exact area of your
-                                photo to keep. Perfect for converting full-body photos or landscape images into
-                                passport-style photos required by Sarkari exams. Drag, position, and apply—all in your
-                                browser.</p>
-                        </div>
-                    </div>
-                </div>
+                    <div class="space-y-4">
+                        <details class="border-b border-gray-200 pb-4">
+                            <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">
+                                What
+                                are the photo requirements for SSC exams?</summary>
+                            <p class="text-gray-700 mt-3">SSC CGL and CHSL require photos with dimensions of 3.5cm x
+                                4.5cm
+                                and maximum file size of 50KB. Our tool automatically resizes your photo to these exact
+                                specifications with the option to add today's date, which is mandatory for SSC
+                                applications.
+                            </p>
+                        </details>
 
-                <!-- Benefit 2 -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <div class="flex items-start">
-                        <div class="text-4xl mr-4">🇮🇳</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Built for India</h3>
-                            <p class="text-gray-700">Pre-configured for all major Indian government exams: SSC, UPSC,
-                                Railway RRB, Banking IBPS, GATE, Defence, and more. No need to manually enter dimensions
-                                or file sizes—just select your exam and we handle the rest. Supports all Sarkari Naukri
-                                photo requirements.</p>
-                        </div>
-                    </div>
-                </div>
+                        <details class="border-b border-gray-200 pb-4">
+                            <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">
+                                What
+                                is the UPSC photo size requirement?</summary>
+                            <p class="text-gray-700 mt-3">UPSC requires photos with 350x350 pixels dimensions and
+                                maximum
+                                size of 300KB. Select the "UPSC" preset from the dropdown, and our tool will handle the
+                                conversion automatically.</p>
+                        </details>
 
-                <!-- Benefit 3 -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <div class="flex items-start">
-                        <div class="text-4xl mr-4">💰</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Completely Free Forever</h3>
-                            <p class="text-gray-700">Why pay ₹50-200 to photo studios for each exam application? Our
-                                tool is 100% free with no hidden costs, no registration, and no subscriptions. Save
-                                money while applying for multiple government exams across India. Process unlimited
-                                photos anytime.</p>
-                        </div>
-                    </div>
-                </div>
+                        <details class="border-b border-gray-200 pb-4">
+                            <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">Is
+                                this photo resizer tool free?</summary>
+                            <p class="text-gray-700 mt-3">Yes, absolutely! Our photo resizer is 100% free with no hidden
+                                charges. All processing happens in your browser, so there are no upload fees or
+                                subscription
+                                costs.</p>
+                        </details>
 
-                <!-- Benefit 4 -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <div class="flex items-start">
-                        <div class="text-4xl mr-4">🔒</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Your Privacy, Guaranteed</h3>
-                            <p class="text-gray-700">Unlike other online photo editors, we never upload your photos to
-                                any server. All processing happens locally in your browser using JavaScript Canvas API.
-                                Your personal photos stay on your device. No data collection, no tracking, no privacy
-                                risks.</p>
-                        </div>
-                    </div>
-                </div>
+                        <details class="border-b border-gray-200 pb-4">
+                            <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">Do
+                                you
+                                upload my photos to a server?</summary>
+                            <p class="text-gray-700 mt-3">No. Your privacy is our priority. All image processing happens
+                                locally in your browser using JavaScript. Your photos never leave your device, ensuring
+                                complete security and privacy.</p>
+                        </details>
 
-                <!-- Benefit 5 -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <div class="flex items-start">
-                        <div class="text-4xl mr-4">⚡</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Instant Results</h3>
-                            <p class="text-gray-700">No waiting, no queues. Upload your photo, crop if needed, select
-                                exam type, and get your processed photo in seconds. Smart compression ensures your photo
-                                meets exact KB requirements without quality loss. Download and use immediately in your
-                                exam application.</p>
-                        </div>
-                    </div>
-                </div>
+                        <details class="border-b border-gray-200 pb-4">
+                            <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">
+                                Can I
+                                use this for other exams besides SSC, UPSC, and GATE?</summary>
+                            <p class="text-gray-700 mt-3">Yes! If your exam has different photo requirements, use the
+                                "Custom Dimensions" option. Enter your required width, height, and maximum file size,
+                                and
+                                the tool will resize your photo accordingly.</p>
+                        </details>
 
-                <!-- Benefit 6 -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <div class="flex items-start">
-                        <div class="text-4xl mr-4">📅</div>
-                        <div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">SSC Date Watermark</h3>
-                            <p class="text-gray-700">SSC requires photos with current date printed. Our tool
-                                automatically adds a professional white date watermark at the bottom of your photo with
-                                one click. No Photoshop needed—perfect for SSC CGL, CHSL, MTS, and other Staff Selection
-                                Commission exams.</p>
-                        </div>
+                        <details class="border-b border-gray-200 pb-4">
+                            <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">
+                                Why do
+                                I need to add a date to my photo?</summary>
+                            <p class="text-gray-700 mt-3">SSC (Staff Selection Commission) requires photos to have the
+                                current date printed on them. Use our "Print Today's Date on Photo" checkbox to
+                                automatically add a white bar with today's date at the bottom of your image.</p>
+                        </details>
+
+                        <details class="border-b border-gray-200 pb-4">
+                            <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">
+                                What
+                                are the Railway RRB photo requirements?</summary>
+                            <p class="text-gray-700 mt-3">Railway RRB (NTPC, Group D, ALP, RPF) requires photos with
+                                3.5cm x
+                                4.5cm dimensions and a maximum file size of 40KB - stricter than SSC's 50KB. Select the
+                                "Railway RRB" preset and our tool will automatically compress your photo to meet the
+                                40KB
+                                limit without losing quality.</p>
+                        </details>
+
+                        <details class="border-b border-gray-200 pb-4">
+                            <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">
+                                What
+                                is the Banking IBPS photo size?</summary>
+                            <p class="text-gray-700 mt-3">Banking exams (IBPS PO, Clerk, SO, RRB) require 200x230 pixel
+                                photos with a maximum of 50KB file size. This is a smaller dimension than other exams,
+                                making quality more important. Use our crop tool first to frame your photo properly,
+                                then
+                                select "Banking IBPS" preset for perfect results.</p>
+                        </details>
+
+                        <details class="border-b border-gray-200 pb-4">
+                            <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">
+                                Can I
+                                use the crop tool for passport photos?</summary>
+                            <p class="text-gray-700 mt-3">Yes! Our crop tool is perfect for creating passport-style
+                                photos
+                                from full-body or landscape images. After uploading, drag the crop selection box to
+                                center
+                                your face and upper body. Click "Apply Crop" and then select your exam preset. This is
+                                especially useful for converting smartphone photos into proper government exam photos.
+                            </p>
+                        </details>
+
+                        <!-- New FAQ Items for Long-Tail Keywords -->
+                        <details class="border-b border-gray-200 pb-4">
+                            <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">
+                                How to
+                                resize photo to exact KB for government exams?</summary>
+                            <p class="text-gray-700 mt-3">Our free photo resizer tool automatically compresses your
+                                photo to
+                                meet exact file size requirements (KB)
+                                for any government exam. Simply select your exam preset (SSC-50KB, Railway RRB-40KB,
+                                UPSC-300KB, Banking-50KB, GATE-100KB)
+                                and the tool intelligently compresses without quality loss. No manual adjustment needed
+                                -
+                                get perfect passport photos
+                                for Sarkari Naukri in seconds!</p>
+                        </details>
+
+                        <details class="border-b border-gray-200 pb-4">
+                            <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">Is
+                                this
+                                passport photo maker free forever?</summary>
+                            <p class="text-gray-700 mt-3">Yes! Our photo resizer is 100% free with no hidden charges, no
+                                trial period, and no subscription.
+                                Process unlimited photos for all your government exam applications - SSC, UPSC, Railway,
+                                Banking, Defence, NTA exams.
+                                Completely free forever for all Indian students. Save money and time with our free
+                                passport
+                                photo tool!</p>
+                        </details>
+
+                        <details class="border-b border-gray-200 pb-4">
+                            <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">
+                                What
+                                is
+                                the best photo size for Indian government exams?</summary>
+                            <p class="text-gray-700 mt-3">Different exams have different requirements: SSC CGL
+                                (3.5cm×4.5cm,
+                                50KB), UPSC CSE (350×350px, 300KB),
+                                Railway RRB (3.5cm×4.5cm, 40KB), Banking IBPS (200×230px, 50KB), GATE (480×640px,
+                                100KB).
+                                Our free photo resizer has all
+                                these presets built-in, so just select your exam and we handle the rest automatically.
+                                Perfect for all Sarkari Naukri applications!</p>
+                        </details>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- FAQ Section with Schema -->
-        <div class="mt-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Frequently Asked Questions</h2>
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <div class="space-y-4">
-                    <details class="border-b border-gray-200 pb-4">
-                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">What
-                            are the photo requirements for SSC exams?</summary>
-                        <p class="text-gray-700 mt-3">SSC CGL and CHSL require photos with dimensions of 3.5cm x 4.5cm
-                            and maximum file size of 50KB. Our tool automatically resizes your photo to these exact
-                            specifications with the option to add today's date, which is mandatory for SSC applications.
-                        </p>
-                    </details>
-
-                    <details class="border-b border-gray-200 pb-4">
-                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">What
-                            is the UPSC photo size requirement?</summary>
-                        <p class="text-gray-700 mt-3">UPSC requires photos with 350x350 pixels dimensions and maximum
-                            size of 300KB. Select the "UPSC" preset from the dropdown, and our tool will handle the
-                            conversion automatically.</p>
-                    </details>
-
-                    <details class="border-b border-gray-200 pb-4">
-                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">Is
-                            this photo resizer tool free?</summary>
-                        <p class="text-gray-700 mt-3">Yes, absolutely! Our photo resizer is 100% free with no hidden
-                            charges. All processing happens in your browser, so there are no upload fees or subscription
-                            costs.</p>
-                    </details>
-
-                    <details class="border-b border-gray-200 pb-4">
-                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">Do you
-                            upload my photos to a server?</summary>
-                        <p class="text-gray-700 mt-3">No. Your privacy is our priority. All image processing happens
-                            locally in your browser using JavaScript. Your photos never leave your device, ensuring
-                            complete security and privacy.</p>
-                    </details>
-
-                    <details class="border-b border-gray-200 pb-4">
-                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">Can I
-                            use this for other exams besides SSC, UPSC, and GATE?</summary>
-                        <p class="text-gray-700 mt-3">Yes! If your exam has different photo requirements, use the
-                            "Custom Dimensions" option. Enter your required width, height, and maximum file size, and
-                            the tool will resize your photo accordingly.</p>
-                    </details>
-
-                    <details class="border-b border-gray-200 pb-4">
-                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">Why do
-                            I need to add a date to my photo?</summary>
-                        <p class="text-gray-700 mt-3">SSC (Staff Selection Commission) requires photos to have the
-                            current date printed on them. Use our "Print Today's Date on Photo" checkbox to
-                            automatically add a white bar with today's date at the bottom of your image.</p>
-                    </details>
-
-                    <details class="border-b border-gray-200 pb-4">
-                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">What
-                            are the Railway RRB photo requirements?</summary>
-                        <p class="text-gray-700 mt-3">Railway RRB (NTPC, Group D, ALP, RPF) requires photos with 3.5cm x
-                            4.5cm dimensions and a maximum file size of 40KB - stricter than SSC's 50KB. Select the
-                            "Railway RRB" preset and our tool will automatically compress your photo to meet the 40KB
-                            limit without losing quality.</p>
-                    </details>
-
-                    <details class="border-b border-gray-200 pb-4">
-                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">What
-                            is the Banking IBPS photo size?</summary>
-                        <p class="text-gray-700 mt-3">Banking exams (IBPS PO, Clerk, SO, RRB) require 200x230 pixel
-                            photos with a maximum of 50KB file size. This is a smaller dimension than other exams,
-                            making quality more important. Use our crop tool first to frame your photo properly, then
-                            select "Banking IBPS" preset for perfect results.</p>
-                    </details>
-
-                    <details class="border-b border-gray-200 pb-4">
-                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">Can I
-                            use the crop tool for passport photos?</summary>
-                        <p class="text-gray-700 mt-3">Yes! Our crop tool is perfect for creating passport-style photos
-                            from full-body or landscape images. After uploading, drag the crop selection box to center
-                            your face and upper body. Click "Apply Crop" and then select your exam preset. This is
-                            especially useful for converting smartphone photos into proper government exam photos.</p>
-                    </details>
-
-                    <!-- New FAQ Items for Long-Tail Keywords -->
-                    <details class="border-b border-gray-200 pb-4">
-                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">How to
-                            resize photo to exact KB for government exams?</summary>
-                        <p class="text-gray-700 mt-3">Our free photo resizer tool automatically compresses your photo to
-                            meet exact file size requirements (KB)
-                            for any government exam. Simply select your exam preset (SSC-50KB, Railway RRB-40KB,
-                            UPSC-300KB, Banking-50KB, GATE-100KB)
-                            and the tool intelligently compresses without quality loss. No manual adjustment needed -
-                            get perfect passport photos
-                            for Sarkari Naukri in seconds!</p>
-                    </details>
-
-                    <details class="border-b border-gray-200 pb-4">
-                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">Is
-                            this
-                            passport photo maker free forever?</summary>
-                        <p class="text-gray-700 mt-3">Yes! Our photo resizer is 100% free with no hidden charges, no
-                            trial period, and no subscription.
-                            Process unlimited photos for all your government exam applications - SSC, UPSC, Railway,
-                            Banking, Defence, NTA exams.
-                            Completely free forever for all Indian students. Save money and time with our free passport
-                            photo tool!</p>
-                    </details>
-
-                    <details class="border-b border-gray-200 pb-4">
-                        <summary class="font-semibold text-lg text-gray-800 cursor-pointer hover:text-purple-600">What
-                            is
-                            the best photo size for Indian government exams?</summary>
-                        <p class="text-gray-700 mt-3">Different exams have different requirements: SSC CGL (3.5cm×4.5cm,
-                            50KB), UPSC CSE (350×350px, 300KB),
-                            Railway RRB (3.5cm×4.5cm, 40KB), Banking IBPS (200×230px, 50KB), GATE (480×640px, 100KB).
-                            Our free photo resizer has all
-                            these presets built-in, so just select your exam and we handle the rest automatically.
-                            Perfect for all Sarkari Naukri applications!</p>
-                    </details>
-                </div>
-            </div>
-        </div>
-
-        <!-- FAQ Schema.org Structured Data -->
-        <script type="application/ld+json">
+            <!-- FAQ Schema.org Structured Data -->
+            <script type="application/ld+json">
         {
           "@context": "https://schema.org",
           "@type": "FAQPage",
@@ -875,13 +979,25 @@
           ]
         }
         </script>
-    </main>
+        </main>
+
+        <!-- Right Sidebar Ad -->
+        <aside class="sidebar-ad">
+            <!-- AdSense Right Sidebar -->
+            <div class="text-center">
+                <p class="font-semibold text-gray-500">Advertisement</p>
+                <p class="text-xs mt-2">300x600</p>
+                <!-- Your AdSense code here -->
+            </div>
+        </aside>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-6 mt-12">
         <div class="container mx-auto px-4 text-center">
             <p class="text-sm">&copy; 2026 Sarkari Photo Resizer. Made with ❤️ for Indian Students.</p>
-            <p class="text-xs text-gray-400 mt-2">All processing happens in your browser. Your photos are never uploaded
+            <p class="text-xs text-gray-400 mt-2">All processing happens in your browser. Your photos are never
+                uploaded
                 to any server.</p>
         </div>
     </footer>
